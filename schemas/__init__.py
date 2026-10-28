@@ -1,0 +1,2 @@
+from schemas.workout_schema import WorkoutSchema
+from schemas.exercise_schema import ExerciseSchema
