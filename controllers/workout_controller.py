@@ -6,11 +6,13 @@ from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from app import db
 from models import Workout, Exercise, WorkoutExercise
 from schemas import WorkoutSchema
+from schemas.workout_schema import WorkoutExerciseSchema
 
 workout_bp = Blueprint("workouts", __name__, url_prefix="/workouts")
 
 workout_schema = WorkoutSchema()
 workouts_schema = WorkoutSchema(many=True)
+workout_exercise_schema = WorkoutExerciseSchema()
 
 
 @workout_bp.route("", methods=["GET"])
@@ -89,7 +91,7 @@ def add_exercise(workout_id):
         return jsonify({"error": "A JSON object is required"}), 400
 
     try:
-        validated_data = workout_schema.fields["workout_exercises"].inner.load(data)
+        validated_data = workout_exercise_schema.load(data)
     except ValidationError as error:
         return jsonify({"errors": error.messages}), 400
 

@@ -28,8 +28,9 @@ def create_app():
     from controllers.workout_controller import workout_bp
     from controllers.exercise_controller import exercise_bp
 
-    app.register_blueprint(workout_bp, url_prefix="/api")
-    app.register_blueprint(exercise_bp, url_prefix="/api")
+    app.register_blueprint(workout_bp, url_prefix="/api/workouts")
+    app.register_blueprint(exercise_bp, url_prefix="/api/exercises")
+    
 
     @app.route("/")
     def home():
